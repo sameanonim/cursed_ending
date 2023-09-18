@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+
+<html lang="en">
+
+
+<body class="text-center">
+
+
+<img class="mb-4" src="/media/images/logo_02-1.png" alt="">
+<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">>Sign in</button>
+
+</form>
+
+</body>
+</html>
+
+{% endblock %}
