@@ -17,6 +17,7 @@ urlpatterns = [
     path('adminlogin', LoginView.as_view(template_name='hospital/adminlogin.html')),
     path('doctorlogin', LoginView.as_view(template_name='hospital/doctorlogin.html')),
     path('patientlogin', LoginView.as_view(template_name='hospital/patientlogin.html')),
+    path('doctorsignup/', DoctorSignupView.as_view(), name='doctorsignup'),
     path('doctor-dashboard/<str:space_name>/', DoctorDashboardView.as_view(), name='doctor-dashboard'),
 ]
 

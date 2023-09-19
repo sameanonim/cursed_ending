@@ -29,7 +29,7 @@ class DoctorForm(BaseModelForm):
 class UserForm(BaseModelForm):
     class Meta:
         model=User
-        fields=['first_name','last_name','username','password']
+        fields=['first_name','last_name','email','password']
         widgets = {
             'password': forms.PasswordInput()
         }

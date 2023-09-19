@@ -151,5 +151,25 @@ class DoctorDashboardView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         context = super().get_context_data(**kwargs)
         place = self.get_object()
         context['patientcount'] = User.objects.all().filter(status=True, assignedDoctorId=self.request.user.id).count()
-        context['doctor'] = Doctor.objects.get(user_id=self.request.user.id) #for profile picture of doctor in sidebar
+        context['doctor'] = Doctor.objects.get(user_id=self.request.user.id)
         return context
+
+class DoctorSignupView(View):
+    def get(self, request):
+        userForm = forms.DoctorUserForm()
+        doctorForm = forms.DoctorForm()
+        return render(request, 'hospital/doctorsignup.html', {'userForm': userForm, 'doctorForm': doctorForm})
+
+    def post(self, request):
+        userForm = forms.DoctorUserForm(request.POST)
+        doctorForm = forms.DoctorForm(request.POST, request.FILES)
+        if userForm.is_valid() and doctorForm.is_valid():
+            user = userForm.save()
+            user.set_password(user.password)
+            user.save()
+            doctor = doctorForm.save(commit=False)
+            doctor.user = user
+            doctor.save()
+            my_doctor_group = Group.objects.get_or_create(name='DOCTOR')
+            return redirect('doctorlogin')
+        return render(request, 'hospital/doctorsignup.html', {'userForm': userForm, 'doctorForm': doctorForm})

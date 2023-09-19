@@ -28,6 +28,7 @@ class Doctor(models.Model):
     first_name = models.CharField(max_length=20, verbose_name='Имя')
     middle_name = models.CharField(max_length=20, verbose_name='Отчество')
     last_name = models.CharField(max_length=20, verbose_name='Фамилия')
+    email = models.EmailField(verbose_name='Электронная почта', unique=True)
     specialization = models.CharField(verbose_name='Специализация', max_length=200)
     image = models.ImageField(verbose_name='Фотография', upload_to='images/', default=None, null=True)
     patients = models.ManyToManyField(User, verbose_name='Пациенты', related_name='doctors', related_query_name='doctor')

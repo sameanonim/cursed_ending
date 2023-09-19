@@ -12,7 +12,7 @@ class DiagnosticStudiesAdmin(admin.ModelAdmin):
     list_display = ['title', 'description', 'date']
 
 class DoctorAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'middle_name', 'last_name', 'specialization']
+    list_display = ['first_name', 'middle_name', 'email', 'last_name', 'specialization']
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'middle_name', 'last_name', 'email']
