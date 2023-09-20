@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+{% load blog_tags %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="row">
+            <div class="card-header">
+                <h1>Детали манипуляции</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <td>Название</td>
+                        <td>{{ object.title }}</td>
+                    </tr>
+                    <tr>
+                        <td>Описание</td>
+                        <td>{{ object.description }}</td>
+                    </tr>
+                    <tr>
+                        <td>Дата проведения манипуляции</td>
+                        <td>{{ object.date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Стоимость</td>
+                        <td>{{ object.price }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <style>
+                .divider {
+                    border: 1px solid rgba(0, 0, 0, 0.25);
+                    margin: 0.25rem;
+                }
+            </style>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

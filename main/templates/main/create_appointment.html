@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="card">
+        <div class="row">
+            <div class="card-header">
+                <img src="{{ object.image.url }}" alt="Фотография доктора" width="300" height="300"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <td>Имя</td>
+                        <td>{{ object.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Отчество</td>
+                        <td>{{ object.middle_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Фамилия</td>
+                        <td>{{ object.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ object.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Специализация</td>
+                        <td>{{ object.specialization }}</td>
+                    </tr>
+                </table>
+
+                <!-- Форма для записи на приём -->
+                <form method="post" action="{% url 'create_appointment' pk=object.id %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Записаться на приём</button>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <!-- Здесь можно добавить дополнительную информацию или функциональность -->
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

@@ -73,20 +73,3 @@ class CreateComment(CreateView):
 
     def get_success_url(self):
         return self.object.post.get_absolute_url()
-
-# class PostSearchView(ListView):
-#     """
-#     Реализация поиска статей на сайте
-#     """
-#     model = Post
-#     context_object_name = 'posts'
-#     paginate_by = 5
-#     template_name = 'blog/post_list.html'
-#
-#     def get_queryset(self):
-#         return Post.objects.filter(slug__icontains=self.request.GET.get('q'))
-#
-#     def get_context_data(self, *, object_list=None, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['q'] = f'Результаты поиска: {self.request.GET.get("q")}'
-#         return context

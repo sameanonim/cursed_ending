@@ -7,12 +7,12 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
 from django.views.generic import CreateView, TemplateView
+from django.contrib.auth.views import LoginView
 
 from core import settings
 
 from users.forms import UserRegisterForm
 from users.models import User
-
 
 class UserRegisterView(CreateView):
     """Реализация регистрации пользователя"""
@@ -90,3 +90,9 @@ class EmailConfirmationFailedView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Ваш электронный адрес не активирован'
         return context
+
+class CustomLoginView(LoginView):
+    template_name = 'users/login.html'
+
+    def get_success_url(self):
+        return reverse_lazy('main:home')

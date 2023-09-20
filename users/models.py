@@ -29,5 +29,8 @@ class User(AbstractUser):
     
     class Meta:
         verbose_name = 'Пациент'
-        verbose_name_plural = 'Поцы'
+        verbose_name_plural = 'Пациенты'
     
+    def make_appointment(self, doctor):
+        self.doctors.add(doctor)
+        self.save()

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h3>Все врачи</h3>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        {% if object_list %}
+        {% for doctor in object_list %}
+        <div class="card">
+            <div class="row">
+                <div class="card-header">
+                    <img src="{{ doctor.image.url }}" alt="Фотография доктора" width="300" height="300"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <td>Имя</td>
+                            <td>{{ doctor.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Отчество</td>
+                            <td>{{ doctor.middle_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Фамилия</td>
+                            <td>{{ doctor.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{ doctor.email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Специализация</td>
+                            <td>{{ doctor.specialization }}</td>
+                        </tr>
+                    </table>
+
+                    <a href="{% url 'main:doctor_detail' doctor.id %}">Подробнее о враче</a>
+
+                </div>
+
+        {% endfor %}
+    </div>
+    {% else %}
+    <h3>Врачей нет</h3>
+    {% endif %}
+</div>
+
+{% endblock %}

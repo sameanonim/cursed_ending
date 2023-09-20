@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h3>Список диагностических исследований</h3>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        {% if object_list %}
+        {% for study in object_list %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'main:diagnostic_studies_detail' study.id %}">{{ study.title }}</a></h5>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h3>Диагностических исследований нет</h3>
+    {% endif %}
+
+    {% if is_paginated %}
+    <div class="pagination">
+      <span class="page-links">
+          {% if page_obj.has_previous %}
+              <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+          {% endif %}
+          <span class="page-current">
+              Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+          </span>
+          {% if page_obj.has_next %}
+              <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Следующая</a>
+          {% endif %}
+      </span>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

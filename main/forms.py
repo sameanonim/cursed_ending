@@ -1,10 +1,11 @@
 from django import forms
 from users.models import User
-from .models import Diagnosis, DiagnosticStudies, Doctor
+from .models import Appointment, Diagnosis, DiagnosticStudies, Doctor
 
 class FormStyleMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
@@ -34,9 +35,6 @@ class UserForm(BaseModelForm):
             'password': forms.PasswordInput()
         }
 
-class AdminSigupForm(UserForm):
-    pass
-
 class DoctorUserForm(UserForm):
     pass
 
@@ -47,3 +45,11 @@ class ContactusForm(forms.Form):
     Name = forms.CharField(max_length=30)
     Email = forms.EmailField()
     Message = forms.CharField(max_length=500,widget=forms.Textarea(attrs={'rows': 3, 'cols': 30}))
+
+class AppointmentForm(forms.ModelForm):
+    doctor = forms.ModelChoiceField(queryset=Doctor.objects.all())
+    date = forms.DateTimeField(widget=forms.SelectDateWidget())
+
+    class Meta:
+        model = Appointment
+        fields = ['doctor', 'date']

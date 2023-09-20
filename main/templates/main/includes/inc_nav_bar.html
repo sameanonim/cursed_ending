@@ -16,6 +16,12 @@
                     <a class="nav-link" href="{% url 'post_list' %}">Posts</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:diagnostic_studies_list' %}">Diagnostic Studies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:doctors_list' %}">Doctors</a>
+                </li>
+                <li class="nav-item">
                     {% if user.is_authenticated %}
                     {% endif %}
                 </li>
@@ -26,6 +32,7 @@
                 <a class="p-2 btn btn-outline-primary" href="{% url 'users:logout' %}">Logout</a>
                 {% else %}
                 <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Sign in</a>
+                <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">Register</a>
                 {% endif %}
             </div>
         </div>
