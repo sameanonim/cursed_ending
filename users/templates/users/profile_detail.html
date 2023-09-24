@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="card border-0">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <figure>
+                    {% if user.photo %}
+                        <img src="{{ user.photo.url }}" class="img-fluid rounded-0" alt="{{ user }}">
+                    {% else %}
+                        <!-- Здесь можно добавить изображение по умолчанию -->
+                    {% endif %}
+                </figure>
+            </div>
+            <div class="col-md-9">
+                <h5 class="card-title">
+                    {{ user }}
+                </h5>
+                <div class="card-text">
+                    <ul>
+                        <li>Никнейм: {{ user.username }}</li>
+                        {% if user.get_full_name %} <li>Имя и фамилия: {{ user.get_full_name }}</li> {% endif %}
+                        <li>Заходил: {{ user.last_login }}</li>
+                        <li>Дата рождения: {{ user.birth_date }}</li>
+                    </ul>
+                <a href="{% url 'profile_edit' %}" class="btn btn-sm btn-primary">Редактировать профиль</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

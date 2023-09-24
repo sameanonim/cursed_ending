@@ -28,7 +28,7 @@
 
             </ul>
             <div class="col-4 d-flex justify-content-end align-items-center pr-2">
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated%}
                 <a class="p-2 btn btn-outline-primary" href="{% url 'users:logout' %}">Logout</a>
                 {% else %}
                 <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Sign in</a>

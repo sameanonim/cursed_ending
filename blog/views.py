@@ -16,7 +16,6 @@ class PostListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        # queryset = queryset.filter(published=True)
         return queryset
 
 
@@ -25,7 +24,9 @@ class PostCategoryListView(ListView):
     model = Post
 
     def get_queryset(self):
-        return Post.objects.filter(category__slug=self.kwargs.get("slug")).select_related('category')
+        return Post.objects.filter(
+            category__slug=self.kwargs.get("slug")
+        ).select_related('category')
 
 
 class PostByTagListView(ListView):

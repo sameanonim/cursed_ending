@@ -1,4 +1,5 @@
-from django.core.validators import RegexValidator, EmailValidator
+from django.core.validators import (RegexValidator, EmailValidator,
+                                    FileExtensionValidator)
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -25,4 +26,8 @@ phone_validator = RegexValidator(
 
 email_validator = EmailValidator(
     message='Введите корректный адрес электронной почты'
+)
+
+image_validator = FileExtensionValidator(
+    allowed_extensions=('png', 'jpg', 'jpeg')
 )

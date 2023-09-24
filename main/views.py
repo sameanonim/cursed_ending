@@ -1,8 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 
 from blog.models import Post
@@ -78,7 +76,8 @@ class AppointmentView(View):
     def confirm_appointment(self, request, *args, **kwargs):
         appointment_id = request.POST.get('appointment_id')
         appointment = get_object_or_404(Appointment, id=appointment_id)
-        if request.user.is_authenticated and request.user == appointment.doctor:
+        if request.user.is_authenticated and \
+                request.user == appointment.doctor:
             appointment.confirmed = True
             appointment.save()
             return redirect('appointments')
@@ -89,7 +88,7 @@ class AppointmentView(View):
 class CreateAppointmentView(View):
     model = Appointment
     template_name = 'main/confirm_appointment.html'
-    
+
     def post(self, request, *args, **kwargs):
         doctor = get_object_or_404(Doctor, id=self.kwargs.get('pk'))
         form = AppointmentForm(request.POST)
@@ -103,4 +102,5 @@ class CreateAppointmentView(View):
             else:
                 return redirect('login')
         else:
-            return render(request, 'main/doctor_detail.html', {'form': form, 'doctor': doctor})
+            return render(request, 'main/doctor_detail.html',
+                          {'form': form, 'doctor': doctor})

@@ -10,15 +10,24 @@ app_name = UsersConfig.name
 
 urlpatterns = [
 
-    path('', views.CustomLoginView.as_view(template_name='users/login.html'), name='login'),
+    path('', views.CustomLoginView.as_view(template_name='users/login.html'),
+         name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', views.UserRegisterView.as_view(), name='register'),
-    path('email-confirmation-sent/', views.EmailConfirmationSentView.as_view(), name='email_confirmation_sent'),
-    path('confirm-email/<str:uidb64>/<str:token>/', views.UserConfirmEmailView.as_view(), name='confirm_email'),
-    path('email-confirmed/', views.EmailConfirmedView.as_view(), name='email_confirmed'),
-    path('confirm-email-failed/', views.EmailConfirmationFailedView.as_view(), name='email_confirmation_failed'),
+    path('email-confirmation-sent/', views.EmailConfirmationSentView.as_view(),
+         name='email_confirmation_sent'),
+    path('confirm-email/<str:uidb64>/<str:token>/',
+         views.UserConfirmEmailView.as_view(), name='confirm_email'),
+    path('email-confirmed/', views.EmailConfirmedView.as_view(),
+         name='email_confirmed'),
+    path('confirm-email-failed/', views.EmailConfirmationFailedView.as_view(),
+         name='email_confirmation_failed'),
+    path('user/<str:slug>/', views.UserDetailView.as_view(),
+         name='profile_detail'),
+    path('user/edit/', views.UserUpdateView.as_view(), name='profile_edit'),
 
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
